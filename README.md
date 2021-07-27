@@ -1,6 +1,6 @@
 # discord-bot-example
 A simple discord bot using Javascript &amp; some JS libraries to display data.
-
+To program the discord bot, you will first need to install the Discord bot library: https://discord.js.org/ <br/>
 I use some api websites, which are random joke to get a joke and meme-api to get a random meme post from subreddits.
 
 Random Joke api: https://official-joke-api.appspot.com/random_joke
