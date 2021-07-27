@@ -5,7 +5,7 @@ I use some api websites, which are random joke to get a joke and meme-api to get
 
 Random Joke api: https://official-joke-api.appspot.com/random_joke
 
-Reddit meme post api: https://meme-api.herokuapp.com/gimme/[put_your_subreddit_name_here_to_get_a_post] (i.e endpoint should be /gimme/memes)
+Reddit meme post api: https://meme-api.herokuapp.com/gimme/<!---[put_your_subreddit_name_here_to_get_a_post]---> (i.e endpoint should be /gimme/memes)
 
 Note: The reddit meme api is created by D3vd (check out his github: https://github.com/D3vd/Meme_Api)
 
