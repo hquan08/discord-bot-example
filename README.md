@@ -19,5 +19,4 @@ I use it to display the weather data when type in the location you want to find 
 Also, you will need to login to discord developer to be able to create a new project, which will have an option to create a new bot for your own work plus a bot token
 to make it work in the code.<br/>
 I am learning JS so it won't be perfect as it seems but I will try to improve myself!<br/>
-Cheers!
-
+It's my first time using Github so feel free to help me with this and feel free to comment/edit on my file :)! thanks
