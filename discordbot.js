@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-const Discord = require('discord.js');
+const Discord = require('discord.js'); //install discord-js lib
 const client = new Discord.Client();
-const fetch = require('node-fetch');
-const translator = require('@iamtraction/google-translate');
-const weather = require('weather-js');
+const fetch = require('node-fetch'); //install fetch library to fetch data from api website
+const translator = require('@iamtraction/google-translate'); //install translator.js lib
+const weather = require('weather-js'); //install weather-js lib
 
 
 const memeSubreddit = ['dankmemes', 'memes', 'Animemes']; //array contains some subreddit
@@ -20,10 +20,18 @@ client.on("ready", () => {
     console.log('the bot is running');
 });
 
+//July 28th 2021, added function getQuery to replace the code inside weather command (or any command that relates to search a string after prefix + command
+function getQuery(str) {
+    const message = str.toLowerCase(); //just to make sure anything will be in lower case to ignore case sensitive
+    const arrayOfStr = str.slice(cmd.length).split(" "); //cut "!", then put the rest into array - in this case, 'array' variable
+    const query = arrayOfStr.slice(1).join(" "); //then we slice 'i.e: weather' or any command you want to use and join the rest to become a string
+    return query;
+}
+
 
 client.on("message", async (msg) => {
     if (msg.author.bot)
-        return;
+        return; //avoid the bot looping some sentence
     //an interaction with the bot
     if (msg.content === "Hello bot".toLowerCase() || msg.content === "Hi bot".toLowerCase()) {
         msg.reply("Hello there");
@@ -61,10 +69,10 @@ client.on("message", async (msg) => {
 
     //find weather of a city
     if (msg.content.startsWith(cmd + "weather")) {
-        let message = msg.content.toLowerCase();
-        let query = msg.content.slice(cmd.length).split(" "); //cut "!", then put the rest into array - in this case, 'query' variable
-        let city = query.slice(1).join(" "); //then we slice 'weather' and join the rest to become a string (it means location name)
-        weather.find({ search: city, degreeType: 'C' }, async (err, res) => {
+        //July 28th 2021, replace all the code into a function and attach it to a variable, meaning clean code!
+        let locQuery = await getQuery(msg.content);
+        
+        weather.find({ search: locQuery, degreeType: 'C' }, async (err, res) => {
             if (err) {
                 msg.reply("Please input the name of location you want to find");
             }
@@ -73,7 +81,7 @@ client.on("message", async (msg) => {
                     var loc = res[0].location;
                     var cur = res[0].current;
                     const embedMessage = new Discord.MessageEmbed()
-                        .setTitle('Thời tiết tại ' + "" + city)
+                        .setTitle('Thời tiết tại ' + "" + locQuery)
                         .setThumbnail(cur.imageUrl)
                         .setTimestamp()
                         .addField("Địa điểm", `${loc.name}`)
@@ -91,7 +99,7 @@ client.on("message", async (msg) => {
                     await msg.reply(embedMessage);
                 }
                 else {
-                    await msg.reply(`There is no location **${city}**, you idiot!!`);
+                    await msg.reply(`There is no location **${locQuery}**, you idiot!!`);
                 }
             }
         });
