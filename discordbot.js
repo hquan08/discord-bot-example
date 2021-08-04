@@ -128,7 +128,61 @@ client.on("message", async (msg) => {
             .setTimestamp();
         msg.reply(messageEmbed);
     }
+    
+    //covid 19 api by covid19api.com
+    if (msg.content.startsWith(cmd + "covid")) {
+        let loc = getQuery(msg.content);
+        if (loc === "") {
+            let getData = async () => {
+                let data = await fetch('https://api.covid19api.com/summary');
+                let resp = data.json();
+                return resp;
+            };
 
+            let covidData = await getData();
+            const messageEmbed = new Discord.MessageEmbed()
+                .setTitle('Thống kê Covid-19 toàn thế giới')
+                .addFields(
+                    { name: "Số ca mắc mới", value: covidData.Global.NewConfirmed, inline: true },
+                    { name: "Tổng số ca mắc", value: covidData.Global.TotalConfirmed, inline: true }
+                )
+                .addFields(
+                    { name: "Số ca tử vong mới", value: covidData.Global.NewDeaths, inline: true },
+                    { name: "Tổng số ca tử vong", value: covidData.Global.TotalDeaths, inline: true }
+                )
+                .addFields(
+                    { name: "Số ca hồi phục mới", value: covidData.Global.NewRecovered, inline: true },
+                    { name: "Tổng số ca hồi phục", value: covidData.Global.TotalRecovered, inline: true },
+                )
+                .setFooter("Data collected via covid19api.com")
+                .setTimestamp();
+            await msg.channel.send(messageEmbed);
+        }
+        else {
+            let getData = async () => {
+                let data = await fetch(`https://api.covid19api.com/total/country/${loc}`);
+                let resp = data.json();
+                return resp;
+            };
+            let countryData = await getData();
+            if (countryData[countryData.length - 1] !== undefined) {
+                const messageEmbed = new Discord.MessageEmbed()
+                    .setTitle(loc.toUpperCase())
+                    .addField("Tổng số ca nhiễm", countryData[countryData.length - 1].Confirmed)
+                    .addFields(
+                        { name: "Số ca đang điều trị", value: countryData[countryData.length - 1].Active, inline: true },
+                        { name: "Số ca phục hồi", value: countryData[countryData.length - 1].Recovered, inline: true },
+                        { name: "Số ca tử vong", value: countryData[countryData.length - 1].Deaths, inline: true }
+                    )
+                    .setFooter("Data collected via covid19api.com")
+                    .setTimestamp();
+                await msg.channel.send(messageEmbed);
+            }
+            else {
+                await msg.reply("We couldn't find the country you ask for, please search again");
+            }
+        }
+    }
 
     //see available commands
     if (msg.content.startsWith(cmd + "command")) {
