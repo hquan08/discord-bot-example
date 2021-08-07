@@ -186,7 +186,7 @@ client.on("message", async (msg) => {
 
     //see available commands
     if (msg.content.startsWith(cmd + "command")) {
-        msg.channel.send("Available commands: !joke, !weather, !getmeme");
+        msg.channel.send("Available commands: !joke, !weather, !getmeme, !covid");
     }
 });
 
