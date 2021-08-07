@@ -7,7 +7,9 @@ Random Joke api: https://official-joke-api.appspot.com/random_joke
 
 Reddit meme post api: https://meme-api.herokuapp.com/gimme/<!---[put_your_subreddit_name_here_to_get_a_post]---> (i.e endpoint should be /gimme/memes)
 
-Note: The reddit meme api is created by D3vd (check out his github: https://github.com/D3vd/Meme_Api)
+Note:
+The Random joke api is created by 15Dkatz (checkout his github: https://github.com/15Dkatz) 
+The reddit meme api is created by D3vd (check out his github: https://github.com/D3vd)
 
 Some libraries used: 
 1. Translator.js (https://github.com/muaz-khan/Translator)<br/>
