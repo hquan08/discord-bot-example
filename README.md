@@ -20,6 +20,7 @@ I use it to display the weather data when type in the location you want to find 
 
 Also, you will need to login to discord developer to be able to create a new project, which will have an option to create a new bot for your own work plus a bot token
 to make it work in the code.<br/>
-<b>How to run the bot:<b/> Install a library called nodemo and in package.json, add a new line under the "scripts" called "devStart":"nodemon". In the terminal command, type npm run devStart to run the bot. It will automatically restart and compile and run the bot whenever you make a change in your code. <br/><br/>
+#How to run the bot 
+Install a library called nodemo and in package.json, add a new line under the "scripts" called "devStart":"nodemon".In the terminal command, type npm run devStart to run the bot. It will automatically restart and compile and run the bot whenever you make a change in your code. <br/><br/>
 I am learning JS so it won't be perfect as it seems but I will try to improve myself!<br/>
 It's my first time using Github so feel free to help me with this and feel free to comment/edit on my file :)! thanks
