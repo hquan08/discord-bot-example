@@ -3,9 +3,6 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fetch = require('node-fetch');
-const translator = require('@iamtraction/google-translate');
-const weather = require('weather-js');
-
 
 const memeSubreddit = ['dankmemes', 'memes', 'Animemes']; //array contains some subreddit
 
@@ -66,18 +63,19 @@ client.on("message", async (msg) => {
             });
     }
 
-
-    const farenhightToC = (num) => {
+    //replace the "weather-js" code (As of August 17th 2021)
+    //function to convert temp K to temp C
+    const kToC = (num) => {
         let temp = parseInt(num - 273.15);
         return temp;
     }
-    const base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    const base_url = "http://api.openweathermap.org/data/2.5/weather?" 
     //find weather of a city
     if (msg.content.startsWith(cmd + "weather")) {
         let temp;
         let locQuery = getQuery(msg.content);
         let getInfo = async (string) => {
-            const complete_url = base_url + "appid=196c7b88689182f0112c1d4d7bcc2df5" + "&q=" + string;
+            const complete_url = base_url + "appid=PUT_YOUR_OPENWEATHER_ACCOUNT_API_HERE" + "&q=" + string;
             await fetch(complete_url)
                 .then(resp => resp.json())
                 .then(data => {
@@ -91,7 +89,7 @@ client.on("message", async (msg) => {
         else {
             const weather_data = await getInfo(locQuery);
             if (weather_data !== undefined) {
-                const temperature = farenhightToC(weather_data.main.temp);
+                const temperature = kToC(weather_data.main.temp);
                 const embed = new Discord.MessageEmbed()
                     .setTitle('Location: ' + weather_data.name)
                     .addFields(
