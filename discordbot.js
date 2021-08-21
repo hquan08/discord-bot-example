@@ -51,17 +51,7 @@ client.on("message", async (msg) => {
             return json;
         }
         let joke = await getData();
-
-        //I use translator.js library
-        translator(`Random joke #${joke.id}:\n ${joke.setup} - ${joke.punchline}`, { default: "en" })
-            //don't work great for Vietnamese language
-            //simply return like msg.reply(`Random joke #${joke.id}:\n ${joke.setup} - ${joke.punchline}`) if you don't need a translator
-            .then(res => {
-                msg.reply(res.text);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        msg.reply(`Random joke #${joke.id}:\n ${joke.setup} - ${joke.punchline}`);
     }
 
 
